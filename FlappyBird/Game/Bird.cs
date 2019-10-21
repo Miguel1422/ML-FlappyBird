@@ -1,5 +1,4 @@
 ﻿using FlappyBird.Game;
-using FlappyBird.NN;
 using FlappyBird.Visual.NN;
 using System;
 using System.Collections.Generic;

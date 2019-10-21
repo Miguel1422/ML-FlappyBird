@@ -46,5 +46,12 @@ namespace FlappyBird.Visual
             GameManager.WIDTH = doubleBufferedPanel1.Width;
             game.resetGame();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            GameManager.HEIGHT = doubleBufferedPanel1.Height;
+            GameManager.WIDTH = doubleBufferedPanel1.Width;
+            game.resetGame();
+        }
     }
 }

@@ -55,9 +55,9 @@ namespace FlappyBird.Visual.Game
         // Draw the pipe
         public void show(Graphics g)
         {
-            Pen p = Pens.Black;
-            g.DrawRectangle(p, this.x, 0, this.w, this.top);
-            g.DrawRectangle(p, this.x, GameManager.HEIGHT - this.bottom, this.w, this.bottom);
+            Brush p = Brushes.Black;
+            g.FillRectangle(p, this.x, 0, this.w, this.top);
+            g.FillRectangle(p, this.x, GameManager.HEIGHT - this.bottom, this.w, this.bottom);
         }
 
         // Update the pipe

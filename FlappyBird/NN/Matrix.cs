@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlappyBird.NN
+namespace FlappyBird.Visual.NN
 {
     public class Matrix
     {

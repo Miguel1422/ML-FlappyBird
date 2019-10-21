@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FlappyBird
+namespace FlappyBird.Visual
 {
     public class DoubleBufferedPanel : Panel
     {
