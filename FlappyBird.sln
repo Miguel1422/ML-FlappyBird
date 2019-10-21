@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlappyBird.Visual", "FlappyBird\FlappyBird.Visual.csproj", "{F9D67A3D-3732-4D90-88FE-4C0C75F82D9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlappyBird.Tests", "FlappyBird.Tests\FlappyBird.Tests.csproj", "{CE82FC52-D681-43D1-9F3F-8D92980BAB90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlappyBird.VisualTests", "FlappyBird.VisualTests\FlappyBird.VisualTests.csproj", "{851D8B8D-334F-4217-A88F-F63DA893BA39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{F9D67A3D-3732-4D90-88FE-4C0C75F82D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9D67A3D-3732-4D90-88FE-4C0C75F82D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9D67A3D-3732-4D90-88FE-4C0C75F82D9F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE82FC52-D681-43D1-9F3F-8D92980BAB90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE82FC52-D681-43D1-9F3F-8D92980BAB90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE82FC52-D681-43D1-9F3F-8D92980BAB90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE82FC52-D681-43D1-9F3F-8D92980BAB90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{851D8B8D-334F-4217-A88F-F63DA893BA39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{851D8B8D-334F-4217-A88F-F63DA893BA39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{851D8B8D-334F-4217-A88F-F63DA893BA39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{851D8B8D-334F-4217-A88F-F63DA893BA39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

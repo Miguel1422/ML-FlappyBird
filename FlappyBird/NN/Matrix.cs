@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlappyBird.Visual.Game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,44 +13,67 @@ namespace FlappyBird.NN
 
         static Matrix()
         {
-            r = new Random(123);
+            r = Constants.r;
         }
         public Matrix(int rows, int cols)
         {
             this.rows = rows;
             this.cols = cols;
-            data = new double[rows, cols];
+            data = new double[rows][];
+            for (int i = 0; i < rows; i++)
+            {
+                data[i] = new double[cols];
+            }
         }
 
-        public delegate double MapFunction(double value, int i, int j);
+        public static Matrix fromArray(double[] arr)
+        {
+            return new Matrix(arr.Length, 1).map((e, i, _) => arr[i]);
+        }
 
-        public Matrix Copy()
+        public delegate double MapFunctionWithIndices(double value, int i, int j);
+        public delegate double MapFunction(double value);
+        
+
+        public Matrix copy()
         {
             var matrix = new Matrix(rows, cols);
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    matrix.data[i, j] = this.data[i, j];
+                    matrix.data[i][j] = this.data[i][j];
                 }
             }
             return matrix;
         }
 
-        public Matrix Map(MapFunction func)
+        public Matrix map(MapFunctionWithIndices func)
         {
             Matrix matrix = new Matrix(rows, cols);
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    matrix.data[i, j] = func(data[i, j], i, j);
+                    matrix.data[i][j] = func(data[i][j], i, j);
+                }
+            }
+            return matrix;
+        }
+        public Matrix map(MapFunction func)
+        {
+            Matrix matrix = new Matrix(rows, cols);
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    matrix.data[i][j] = func(data[i][j]);
                 }
             }
             return matrix;
         }
 
-        public Matrix Substract(Matrix b)
+        public Matrix substract(Matrix b)
         {
             if (rows != b.rows || cols != b.cols)
             {
@@ -57,44 +81,44 @@ namespace FlappyBird.NN
             }
             // Return a new Matrix a-b
             return this
-              .Map((_, i, j) => data[i, j] - b.data[i, j]);
+              .map((_, i, j) => data[i][j] - b.data[i][j]);
         }
 
-        public double[] ToArray()
+        public double[] toArray()
         {
             List<double> res = new List<double>();
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    res.Add(data[i, j]);
+                    res.Add(data[i][j]);
                 }
             }
             return res.ToArray();
         }
 
-        public Matrix Randomize()
+        public Matrix randomize()
         {
-            return this.Map((e, _, __) => r.NextDouble() * 2 - 1);
+            return this.map((e, _, __) => r.NextDouble() * 2 - 1);
         }
 
-        public Matrix Add(Matrix n)
+        public Matrix add(Matrix n)
         {
             if (this.rows != n.rows || this.cols != n.cols)
             {
                 throw new Exception("Columns and Rows of A must match Columns and Rows of B.");
             }
-            return this.Map((e, i, j) => e + n.data[i, j]);
+            return this.map((e, i, j) => e + n.data[i][j]);
         }
-        public Matrix Add(double n)
+        public Matrix add(double n)
         {
-            return this.Map((e, i, j) => e + n);
+            return this.map((e, i, j) => e + n);
         }
 
-        public Matrix Transpose()
+        public Matrix transpose()
         {
             return this
-              .Map((_, i, j) => data[j, i]);
+              .map((_, i, j) => data[j][i]);
         }
 
         public Matrix multiply(Matrix b)
@@ -106,14 +130,14 @@ namespace FlappyBird.NN
 
             }
 
-            return this
-              .Map((e, i, j) =>
+            return new Matrix(this.rows, b.cols)
+              .map((e, i, j) =>
               {
                   // Dot product of values in col
                   double sum = 0;
                   for (int k = 0; k < cols; k++)
                   {
-                      sum += data[i, k] * b.data[k, j];
+                      sum += data[i][k] * b.data[k][j];
                   }
                   return sum;
               });
@@ -121,13 +145,13 @@ namespace FlappyBird.NN
         public Matrix multiply(double n)
         {
             return this
-              .Map((e, i, j) => e * n);
+              .map((e, i, j) => e * n);
         }
 
 
 
         public int rows { get; }
         public int cols { get; }
-        public double[,] data { get; }
+        public double[][] data { get; }
     }
 }
