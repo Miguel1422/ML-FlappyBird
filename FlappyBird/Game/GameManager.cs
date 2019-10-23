@@ -106,7 +106,7 @@ namespace FlappyBird.Game
 
 
                 // Add a new pipe every so often
-                if (counter % 75 == 0)
+                if (counter % Constants.PipeConstants.newPipeEveryFrames == 0)
                 {
                     pipes.Add(new Pipe());
                 }

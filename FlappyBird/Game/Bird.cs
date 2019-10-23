@@ -3,6 +3,7 @@ using FlappyBird.Visual.NN;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,7 @@ namespace FlappyBird.Visual.Game
         static Bird()
         {
             random = Constants.r;
+            image.MakeTransparent(Color.White);
         }
 
 
@@ -60,11 +62,11 @@ namespace FlappyBird.Visual.Game
             // position and size of bird
             this.x = 64;
             this.y = GameManager.HEIGHT / 2;
-            this.r = 12;
+            this.r = Constants.BirdConstants.r;
 
             // Gravity, lift and velocity
-            this.gravity = 0.8;
-            this.lift = -12;
+            this.gravity = Constants.BirdConstants.gravity;
+            this.lift = Constants.BirdConstants.lift;
             this.velocity = 0;
 
             // Is this a copy of another Bird or a new one?
@@ -87,10 +89,13 @@ namespace FlappyBird.Visual.Game
             return new Bird(this.brain);
         }
 
+        private static Bitmap image = new Bitmap(Bitmap.FromFile(@"./Data/bird2.png"), 24, 24);
+        
         public void show(Graphics g)
         {
             Brush brush = Brushes.Black;
-            g.FillEllipse(brush, this.x, (float)this.y, this.r * 2, this.r * 2);
+            // g.FillEllipse(brush, this.x, (float)this.y, this.r * 2, this.r * 2);
+            g.DrawImage(image, (float)this.x, (float)this.y);
         }
 
         public void Think(List<Pipe> pipes)

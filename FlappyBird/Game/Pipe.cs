@@ -25,7 +25,7 @@ namespace FlappyBird.Visual.Game
         public Pipe()
         {
             // How big is the empty space
-            var spacing = 100;
+            var spacing = Constants.PipeConstants.spacing;
             // Where is th center of the empty space
             var centery = r.Next(spacing, GameManager.HEIGHT - spacing);
 
@@ -35,9 +35,9 @@ namespace FlappyBird.Visual.Game
             // Starts at the edge
             this.x = GameManager.WIDTH;
             // Width of pipe
-            this.w = 80;
+            this.w = Constants.PipeConstants.w;
             // How fast
-            this.speed = 6;
+            this.speed = Constants.PipeConstants.speed;
         }
 
         public bool hits(Bird bird)
