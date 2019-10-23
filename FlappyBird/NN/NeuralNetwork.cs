@@ -27,16 +27,17 @@ namespace FlappyBird.Visual.NN
           x => Math.Tanh(x),
           y => 1 - (y * y)
         );
-        private double learning_rate;
-        private ActivationFunction activation_function;
-        private readonly int input_nodes;
-        private readonly int hidden_nodes;
-        private readonly int output_nodes;
+        private ActivationFunction activation_function = sigmoid;
         
-        private Matrix weights_ih;
-        private Matrix weights_ho;
-        private Matrix bias_h;
-        private Matrix bias_o;
+        public double learning_rate { get;  set; }
+        public int input_nodes { get;  set; }
+        public int hidden_nodes { get;  set; }
+        public int output_nodes { get;  set; }
+
+        public Matrix weights_ih { get;  set; }
+        public Matrix weights_ho { get;  set; }
+        public Matrix bias_h { get;  set; }
+        public Matrix bias_o { get;  set; }
 
         public NeuralNetwork(int inNodes, int hidNodes, int outNodes)
         {
@@ -71,6 +72,10 @@ namespace FlappyBird.Visual.NN
             // TODO: copy these as well
             this.setLearningRate();
             this.setActivationFunction(sigmoid);
+        }
+        private NeuralNetwork()
+        {
+
         }
 
 

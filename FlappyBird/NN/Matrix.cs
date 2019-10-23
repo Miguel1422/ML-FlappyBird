@@ -150,8 +150,8 @@ namespace FlappyBird.Visual.NN
 
 
 
-        public int rows { get; }
-        public int cols { get; }
-        public double[][] data { get; }
+        public int rows { get; set; }
+        public int cols { get; set; }
+        public double[][] data { get; set; }
     }
 }

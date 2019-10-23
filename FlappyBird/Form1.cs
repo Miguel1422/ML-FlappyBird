@@ -1,4 +1,5 @@
 ﻿using FlappyBird.Game;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,8 +17,8 @@ namespace FlappyBird.Visual
         private GameManager game;
         public Form1()
         {
-            InitializeComponent();
             game = new GameManager();
+            InitializeComponent();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -52,6 +53,17 @@ namespace FlappyBird.Visual
             GameManager.HEIGHT = doubleBufferedPanel1.Height;
             GameManager.WIDTH = doubleBufferedPanel1.Width;
             game.resetGame();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            game.saveBestBird();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            game.loadBestBird();
         }
     }
 }

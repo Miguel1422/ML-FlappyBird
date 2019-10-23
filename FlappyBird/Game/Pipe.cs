@@ -25,7 +25,7 @@ namespace FlappyBird.Visual.Game
         public Pipe()
         {
             // How big is the empty space
-            var spacing = 125;
+            var spacing = 100;
             // Where is th center of the empty space
             var centery = r.Next(spacing, GameManager.HEIGHT - spacing);
 
@@ -55,7 +55,7 @@ namespace FlappyBird.Visual.Game
         // Draw the pipe
         public void show(Graphics g)
         {
-            Brush p = Brushes.Black;
+            Brush p = Brushes.Green;
             g.FillRectangle(p, this.x, 0, this.w, this.top);
             g.FillRectangle(p, this.x, GameManager.HEIGHT - this.bottom, this.w, this.bottom);
         }

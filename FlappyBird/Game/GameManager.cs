@@ -1,4 +1,6 @@
 ﻿using FlappyBird.Visual.Game;
+using FlappyBird.Visual.NN;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -30,7 +32,7 @@ namespace FlappyBird.Game
         List<Pipe> pipes = new List<Pipe>();
         // A frame counter to determine when to add a pipe
         int counter = 0;
-
+        public Bird BestBird { get; private set; }
         // Interface elements
         int speedSlider;
         int speedSpan;
@@ -79,7 +81,7 @@ namespace FlappyBird.Game
                     // Bird uses its brain!
                     bird.Think(pipes);
                     bird.update();
-                    
+
                     if (bird.bottomTop())
                     {
                         activeBirds.RemoveAt(i);
@@ -98,7 +100,7 @@ namespace FlappyBird.Game
                         }
                     }
 
-                    
+
 
                 }
 
@@ -127,10 +129,12 @@ namespace FlappyBird.Game
                 }
             }
 
+
             // Is it the all time high scorer?
             if (tempHighScore > highScore)
             {
                 highScore = tempHighScore;
+                this.BestBird = tempBestBird;
             }
 
 
@@ -158,7 +162,7 @@ namespace FlappyBird.Game
         public void resetGame()
         {
             counter = 0;
-            pipes.Clear(); 
+            pipes.Clear();
         }
 
         // Create the next generation
@@ -171,6 +175,30 @@ namespace FlappyBird.Game
             activeBirds = generate(allBirds);
             // Copy those birds to another array
             allBirds = new List<Bird>(activeBirds);
+        }
+
+        public void saveBestBird()
+        {
+            string bestBird = JsonConvert.SerializeObject(BestBird.brain, Formatting.Indented);
+            System.IO.File.WriteAllText("bird.txt", bestBird);
+        }
+
+        public void loadBestBird()
+        {
+            string bestBird = System.IO.File.ReadAllText("bird.txt");
+            NeuralNetwork nn = JsonConvert.DeserializeObject<NeuralNetwork>(bestBird);
+
+            activeBirds.Clear();
+            allBirds.Clear();
+            for (int i = 0; i < totalPopulation; i++)
+            {
+                var bird = new Bird(nn);
+                activeBirds.Add(bird);
+                allBirds.Add(bird);
+            }
+
+            nextGeneration();
+
         }
 
         // Generate a new population of birds
