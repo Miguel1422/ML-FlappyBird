@@ -88,8 +88,8 @@ namespace FlappyBird.Visual.Game
         {
             return new Bird(this.brain);
         }
-
-        private static Bitmap image = new Bitmap(Bitmap.FromFile(@"./Data/bird2.png"), 24, 24);
+        
+        private static Bitmap image = new Bitmap(new Bitmap(Properties.Resources.Bird), 24, 24);
         
         public void show(Graphics g)
         {
